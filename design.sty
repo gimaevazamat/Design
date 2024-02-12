@@ -1,0 +1,125 @@
+%design.sty
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+\ctikzset{american, resistor = european, inductor = american}
+\usetikzlibrary{circuits}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing,calc}
+\usetikzlibrary{patterns, patterns.meta}
+
+%\makeatletter
+%\newcommand{\gettikzxy}[3]{%
+%	\tikz@scan@one@point\pgfutil@firstofone#1\relax
+%	\edef#2{\the\pgf@x}%
+%	\edef#3{\the\pgf@y}%
+%}
+%\makeatother
+%
+%\tikzset{
+%	clip even odd rule/.code={\pgfseteorule}, % Credit to Andrew Stacey 
+%	invclip/.style={
+%		clip,insert path=
+%		[clip even odd rule]{
+%			[reset cm](-\maxdimen,-\maxdimen)rectangle(\maxdimen,\maxdimen)
+%		}
+%	}
+%}
+
+\tikzstyle arrowstyle=[scale=1]
+\tikzstyle directed=[postaction={decorate,decoration={markings,
+		mark=at position .6 with {\arrow[arrowstyle]{stealth}}}}]
+\tikzstyle reverse directed=[postaction={decorate,decoration={markings,
+		mark=at position .4 with {\arrowreversed[arrowstyle]{stealth};}}}]
+
+\tikzstyle{ground}=[pattern={Lines[angle=45,distance=0.074cm]},fill,draw=none]
+\tikzstyle{groundPerp}=[pattern={Lines[angle=-45,distance=0.074cm]},fill,draw=none]
+\tikzstyle{groundHor}=[pattern={Lines[angle=0,distance=0.074cm]},fill,draw=none]
+
+%\tikzdeclarepattern{
+%	name=arrowsHor,
+%	type=uncolored,
+%	bottom left={(-0.1,-0.1)},
+%	top right={(0.3,0.3)},
+%	tile size={(0.4,0.4)},
+%	tile transformation={rotate=0},
+%	code={
+%		\draw [>=latex',->,thin] (0,0) -- (0.3,0); 
+%} }
+
+\definecolor{titleColor} {rgb} {0.439,0.188,0.627}
+\definecolor{glassColor} {HTML} {FFF2B2}
+\definecolor{waterColor} {HTML} {9ACEFF}
+\definecolor{gasColor} {HTML} {BBFFAB}
+
+\tikzstyle{glass}=[fill=glassColor, fill opacity=0.5]
+\tikzstyle{water}=[fill=waterColor, fill opacity=0.5]
+\tikzstyle{gas}=[fill=gasColor, fill opacity=0.5]
+
+
+\newcommand{\lightsource}[1]{
+	\begin{scope}[shift={#1}]
+		\foreach \i in {0,30,...,359}
+		\draw[ultra thin,rotate=\i] (0,0) -- (0.15,0);
+		\draw[fill=white] (0,0) circle (0.05);
+	\end{scope}
+}
+
+%\newcommand{\vecToPlane}[3]{
+%	\begin{scope}[shift={#1}]
+%		\draw(0,0) circle (0.05);
+%		\fill(0,0) circle (0.01);
+%		\path(0,0) node [#2] {#3};
+%	\end{scope}
+%}
+
+% Старая версия \dist
+\newcommand{\olddist}[5]{
+	\begin{scope}
+		\draw[shift={#1},rotate=#3,ultra thin] (0,0) --++ (0.6,0);
+		\draw[shift={#2},rotate=#3,ultra thin] (0,0) --++ (0.6,0);
+		
+		\path[shift={#1},rotate=#3] (.5,0) coordinate(a);
+		\path[shift={#2},rotate=#3] (.5,0) coordinate(b);
+		
+		\draw[ultra thin,<->] (a) -- (b) node[pos=0.5,#4] {#5};
+	\end{scope}
+}
+
+\usepackage{xparse}
+\NewDocumentCommand{\dist}{O{0.6} O{0.5} m m m m m }{
+	\begin{scope}
+		\draw[shift={#3},rotate=#5,ultra thin] (0,0) --++ (#1,0);
+		\draw[shift={#4},rotate=#5,ultra thin] (0,0) --++ (#1,0);
+		
+		\path[shift={#3},rotate=#5] (#2,0) coordinate(a);
+		\path[shift={#4},rotate=#5] (#2,0) coordinate(b);
+		
+		\draw[ultra thin,<->] (a) -- (b) node[pos=0.5,#6] {#7};
+	\end{scope}
+}
+
+\NewDocumentCommand{\smalldist}{O{0.6} O{0.5} m m m m m }{
+	\begin{scope}
+		\draw[shift={#3},rotate=#5,ultra thin] (0,0) --++ (#1,0);
+		\draw[shift={#4},rotate=#5,ultra thin] (0,0) --++ (#1,0);
+		
+		\path[shift={#3},rotate=#5] (#2,0) coordinate(a);
+		\path[shift={#3},rotate=#5] (#2,0.2) coordinate(A);
+		
+		\path[shift={#4},rotate=#5] (#2,0) coordinate(b);
+		\path[shift={#4},rotate=#5] (#2, -0.2) coordinate(B);
+		
+		
+		\draw[ultra thin,<-] (a) -- (A);
+		\draw[ultra thin,<-] (b) -- (B);
+		
+		
+		\path[rotate=#5]  ($(a)!0.5!(b)$) coordinate(c);
+		\node[#6]at (c) {#7};
+		
+	\end{scope}
+}
+
