@@ -72,7 +72,7 @@
 		\end{tikzpicture}
 	\end{figure}
 \end{code}
-Этот кусок кода рисует отрезок соединяющий точки с координатами $(0,0)$ и $(0,2~\text{сm})$.
+Этот кусок кода рисует отрезок соединяющий точки с координатами $(0,0)$ и $(2~\text{сm},0)$.  Вообще, стандартной единицой длины в tikz являются сантиметры, но можно, например, в качестве координаты точки использовать $(2\text{pt}, 0)$.
 	
 \subsection{Стрелочки и подписи}
 Для стрелочек используются аргумент \verb|[>=latex']|, который можно указывать непосредственно при отрисовке каждого объекта, но проще его вынести в аргумент всего изображения:
@@ -82,7 +82,7 @@
 		\draw (0,0) ++ (2/2,0) node [below] {Правильная стрелочка};
 	\end{tikzpicture}
 \end{code}
-Также здесь продемонстрирован пример подписи объекта с использованием команды \verb|node|.
+Также здесь продемонстрирован пример подписи объекта с использованием команды \verb|node|. Запись \verb|++(2,0)| означает сдвиг отнсительно предыдущей координаты на $2~\text{см}$.
 
 \begin{figure}[h]
 	\centering
@@ -133,6 +133,44 @@ M_3 =
 	0.5&0.5\\0&1
 \end{pmatrix},\]
 а сдвиги $\Delta_2=(2,0)$ и $\Delta_3=(4.5,0)$.
+
+\subsection{Повороты координат и запоминание точки}
+
+Если значительная часть картинки должна быть сдвинута и повернута, то можно использовать окружение \verb|scope|, и использовать аргумент \verb|[shift={(x,y)},rotate=z]|, где \verb|x,y| -- положение центра координат \verb|scope| на холста, а \verb|z| -- угол в градусах, на который будет повернуты координаты внутри \verb|scope| относительно координат \verb|scope|. При этом бывает полезно запомнить точку, координаты которой внутри scope задаются простым способом с помощью команды \verb|coordinate (name)|. Далее \verb|(name)| можно использовать наравне с любыми другими точками.
+
+\begin{figure}[h]
+\begin{minipage}{0.3\linewidth}
+	\centering
+	\begin{tikzpicture}[example,>=latex']
+		\draw[fill=black!25] (0,0) -- (2,0) -- (20:1) -- cycle;
+		\begin{scope}[rotate=20]
+			\draw[fill=black!25] (0,0) -- (1.5,0) -- (20:.75) -- cycle;
+			\path (20:.75) coordinate (a);
+		\end{scope}
+		\begin{scope}[shift={(1,0)},rotate=-20]
+			\draw[fill=black!25] (0,0) -- (1.5,0) -- (20:.75) -- cycle;
+		\end{scope}
+		
+		\draw[->](a) --++ (0,1);
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.7\linewidth}
+	\begin{code}
+	\draw[fill=black!25] (0,0) -- (2,0) -- (20:1) -- cycle;
+	\begin{scope}[rotate=20]
+		\draw[fill=black!25] (0,0) -- (1.5,0) -- (20:.75) -- cycle;
+		\path (20:.75) coordinate (a);
+	\end{scope}
+	\begin{scope}[shift={(1,0)},rotate=-20]
+		\draw[fill=black!25] (0,0) -- (1.5,0) -- (20:.75) -- cycle;
+	\end{scope}
+		
+	\draw[->](a) --++ (0,1);
+	\end{code}
+\end{minipage}
+\end{figure}
+
+В виде \verb|(20:1)| задается точка, удаленная на расстояние $1~\text{cm}$ от начала отсчета, такая, что ее радиус-вектор составляет угол $20^\circ$ с направлением оси $x$ по часовой стрелке. Также корректно использовать \verb| ++ (20:1)| -- сдвиг от текущего положения на $1~\text{cm}$ в направлении составлющем $20^\circ$ о осью $x$.
 
 
 \subsection{Общий принцип}
@@ -747,7 +785,8 @@ M_3 =
 	\end{minipage}
 \end{figure}
 
-\subsection{Тонкости}
+\section{Лайфхаки}
+\subsection{Вертикальные подписи для электроники}
 \begin{enumerate}
 	\item Чтобы подписи для повернутых элементов были тоже вертикальными пользуйтесь командой
 \begin{code}
@@ -755,6 +794,35 @@ M_3 =
 \end{code}
 	в самом начале кода рисунка.
 \end{enumerate}
+\subsection{Вставка растрового риснука внутрь tikz}
+Если вам, например, понадобилось нарисовать обозначения поверх фотографии, то вы можете вставить избражение внутрь \verb|tikzpicture| с помощью команды \verb|\includegraphics|, как текст \verb|node| выбранная точка будет центром вставленного изображения.
 
+\begin{figure}[H]
+\begin{minipage}{0.3\linewidth}
+	\centering	
+	\begin{tikzpicture}[example,>=latex',scale=4.0/6.0]
+	\path (0,0) node {\includegraphics[width=4cm]{pic.jpg}};
+    
+    \begin{scope}[draw=white]
+    		\dist{(0,2.57)}{(0,1.0)}{180}{left}{}
+    		\path(0,{(2.57+1.0)/2}) ++ (180:.5) node [left,white] {$\lambda$};
+    \end{scope}
+
+	\end{tikzpicture}
+\end{minipage}
+\begin{minipage}{0.7\linewidth}
+	\begin{code}
+	\begin{tikzpicture}[example,>=latex',scale=4.0/6.0]
+	\path (0,0) node {\includegraphics[width=4cm]{pic.jpg}};
+    
+    \begin{scope}[draw=white]
+    		\dist{(0,2.57)}{(0,1.0)}{180}{left}{}
+    		\path(0,{(2.57+1.0)/2}) ++ (180:.5) node [left,white] {$\lambda$};
+    \end{scope}
+
+	\end{tikzpicture}
+	\end{code}
+\end{minipage}
+\end{figure}
 
 \end{document}
