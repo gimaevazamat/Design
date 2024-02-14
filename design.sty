@@ -38,6 +38,8 @@
 \tikzstyle{groundPerp}=[pattern={Lines[angle=-45,distance=0.074cm]},fill,draw=none]
 \tikzstyle{groundHor}=[pattern={Lines[angle=0,distance=0.074cm]},fill,draw=none]
 
+\tikzstyle{mirror} = []
+
 %\tikzdeclarepattern{
 %	name=arrowsHor,
 %	type=uncolored,
@@ -101,7 +103,7 @@
 	\end{scope}
 }
 
-\NewDocumentCommand{\smalldist}{O{0.6} O{0.5} m m m m m }{
+\NewDocumentCommand{\sdist}{O{0.6} O{0.5} m m m m m }{
 	\begin{scope}
 		\draw[shift={#3},rotate=#5,ultra thin] (0,0) --++ (#1,0);
 		\draw[shift={#4},rotate=#5,ultra thin] (0,0) --++ (#1,0);

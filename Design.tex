@@ -44,8 +44,15 @@
 \usepackage{design}
 
 
+\usetikzlibrary{shadings}
+\pgfdeclareverticalshading{mygradient}{2cm}{color(0cm)=(blue!50!cyan); color(1.5cm)=(white); color(2.5cm)=(white)}
 
 \begin{document}
+%	\begin{tikzpicture}[>=latex']
+%		\draw[] (0,0) rectangle (4,4);
+%%		\fill[ground] (0,2) arc (23.6:-23.6:5) -- ++ (0.1,0) arc (-23.6:23.6:5);
+%	\end{tikzpicture}
+	
 \begin{huge}
 	\begin{center}
 		\textbf{Физический рисунок}
@@ -340,7 +347,7 @@ M_3 =
 
 \section{Выносные размеры}
 \subsection{Линейные размеры}
-В стандартных случаях, как например подпись длины прямоугольника, можно использовать команды \verb|\dist| и \verb|\smalldist|:
+В стандартных случаях, как например подпись длины прямоугольника, можно использовать команды \verb|\dist| и \verb|\sdist|:
 \begin{figure}[H]
 \begin{minipage}{0.4\linewidth}
 		\centering	
@@ -348,14 +355,14 @@ M_3 =
 		\draw (0,0) rectangle (4,0.5);
 		
 		\dist{(0, 0.5)}{(4, 0.5)}{90}{above}{4 cm}
-		\smalldist{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
+		\sdist{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
 	\end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.6\linewidth}
 \begin{code}
 	\dist{(0, 0.5)}{(4, 0.5)}{90}{above}{4 cm}
 	
-	\smalldist{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
+	\sdist{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
 \end{code}
 \end{minipage}
 \end{figure}
@@ -367,19 +374,19 @@ M_3 =
 		\draw (0,0) rectangle (4,0.5);
 		
 		\dist[1][0.7]{(0, 0.5)}{(4, 0.5)}{90}{above}{4 cm}
-		\smalldist[1.5][0.3]{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
+		\sdist[1.5][0.3]{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
 	\end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.6\linewidth}
 	\begin{code}
 	\dist[1][0.7]{(0,0.5)}{(4,0.5)}{90}{above}{4cm}
 
-	\smalldist[1.5][0.3]{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
+	\sdist[1.5][0.3]{(0,0)}{(0,0.5)}{180}{left}{0.5 cm}
 	\end{code}
 \end{minipage}
 \end{figure}
 
-Команды \verb|\dist| и \verb|\smalldist| имеют 5 обязательных (указываются в фигурных скобках \verb|{}|) и 2 опциональных аргумента (указываются в квадратных скобках \verb|[]| \textbf{перед обязательными}). 
+Команды \verb|\dist| и \verb|\sdist| имеют 5 обязательных (указываются в фигурных скобках \verb|{}|) и 2 опциональных аргумента (указываются в квадратных скобках \verb|[]| \textbf{перед обязательными}). 
 \begin{itemize}
 	\item Первый опциональный аргумент -- это длина выносной линии в сантиметрах\\(\verb|default = 0.6 cm|)
 	\item Второй -- расстояние от стрелок до точек, куда подносится выносной размер\\(\verb|default = 0.5 cm|)
@@ -403,23 +410,23 @@ M_3 =
 	\draw(0.75,0) arc (0:30:0.75);
 	\path[rotate=30/2] (1,0) node {$\alpha$};
 	
-	\draw[rotate=30,double](0.75,0) arc (0:50:0.75);
+	\draw[rotate=30,double=yellow!20](0.75,0) arc (0:50:0.75);
 	\path[rotate=30+50/2] (1,0) node {$\beta$};
 \end{tikzpicture}
 \end{minipage}
 \begin{minipage}{0.8\linewidth}
 	\begin{code}
-		\draw (0,0) -- (2,0);
-		\draw[rotate=30] (0,0) -- (2,0);
-		\draw[rotate=80] (0,0) -- (2,0);	
-		
-		%дуга 0-30
-		\draw(0.75,0) arc (0:30:0.75);
-		\path[rotate=30/2] (1,0) node {$\alpha$};
-		
-		%двойная дуга 30-80
-		\draw[rotate=30,double](0.75,0) arc (0:50:0.75);
-		\path[rotate=30+50/2] (1,0) node {$\beta$};
+	\draw (0,0) -- (2,0);
+	\draw[rotate=30] (0,0) -- (2,0);
+	\draw[rotate=80] (0,0) -- (2,0);	
+	
+	%дуга 0-30
+	\draw(0.75,0) arc (0:30:0.75);
+	\path[rotate=30/2] (1,0) node {$\alpha$};
+	
+	%двойная дуга 30-80
+	\draw[rotate=30,double=yellow!20](0.75,0) arc (0:50:0.75);
+	\path[rotate=30+50/2] (1,0) node {$\beta$};
 	\end{code}
 \end{minipage}
 \end{figure}

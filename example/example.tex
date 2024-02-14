@@ -1,0 +1,16 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+\usepackage{../design}
+
+\begin{document}
+	\begin{tikzpicture}[>=latex']
+		\fill[water] (0,-.5) rectangle ++(2,-2.5);
+		
+		\draw[fill=black!25] (0.025,-0.5) rectangle ++(2-0.05,0.1);
+		\draw[thick] (1,-0.4) -- ++(0,1);
+		
+		\draw[thick] (0,0) --++(0,-3) --++(2,0) --++(0,3);	
+	\end{tikzpicture}
+\end{document}
