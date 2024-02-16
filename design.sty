@@ -39,12 +39,12 @@
 \tikzstyle{groundHor}=[pattern={Lines[angle=0,distance=0.074cm]},fill,draw=none]
 
 
-\tikzstyle{screen}=[pattern={Lines[angle=45,distance=0.15cm]},fill,draw=none]
+\tikzstyle{screen}=[pattern={Lines[angle=45,distance=0.12cm]},fill,draw=none]
 
-\tikzstyle{mirrorLeft} = [shade, draw=none, left color=gray, right color=white]
-\tikzstyle{mirrorRight} = [shade, draw=none, right color=gray, left color=white]
-\tikzstyle{mirrorTop} = [shade, draw=none, top color=gray, bottom color=white]
-\tikzstyle{mirrorBottom} = [shade, draw=none, bottom color=gray, top color=white]
+\tikzstyle{mirrorLeft} = [shade, draw=none, left color=gray!80, right color=gray!10]
+\tikzstyle{mirrorRight} = [shade, draw=none, right color=gray!80, left color=gray!10]
+\tikzstyle{mirrorTop} = [shade, draw=none, top color=gray!80, bottom color=gray!10]
+\tikzstyle{mirrorBottom} = [shade, draw=none, bottom color=gray!80, top color=gray!10]
 
 \tikzstyle{mirror} = [draw=none, fill=gray!40]
 
@@ -86,17 +86,17 @@
 %}
 
 % Старая версия \dist
-\newcommand{\olddist}[5]{
-	\begin{scope}
-		\draw[shift={#1},rotate=#3,ultra thin] (0,0) --++ (0.6,0);
-		\draw[shift={#2},rotate=#3,ultra thin] (0,0) --++ (0.6,0);
-		
-		\path[shift={#1},rotate=#3] (.5,0) coordinate(a);
-		\path[shift={#2},rotate=#3] (.5,0) coordinate(b);
-		
-		\draw[ultra thin,<->] (a) -- (b) node[pos=0.5,#4] {#5};
-	\end{scope}
-}
+%\newcommand{\olddist}[5]{
+%	\begin{scope}
+%		\draw[shift={#1},rotate=#3,ultra thin] (0,0) --++ (0.6,0);
+%		\draw[shift={#2},rotate=#3,ultra thin] (0,0) --++ (0.6,0);
+%		
+%		\path[shift={#1},rotate=#3] (.5,0) coordinate(a);
+%		\path[shift={#2},rotate=#3] (.5,0) coordinate(b);
+%		
+%		\draw[ultra thin,<->] (a) -- (b) node[pos=0.5,#4] {#5};
+%	\end{scope}
+%}
 
 \usepackage{xparse}
 \NewDocumentCommand{\dist}{O{0.6} O{0.5} m m m m m }{
