@@ -37,11 +37,17 @@
 					  pdfauthor={Yaroslav Pozdnyak \& Azamat Gimaev},
 					  pdftitle={Design},
 					  pdfproducer={shiziki},
-					  pdfcreator={shiza}]{hyperref}
+					  pdfcreator={shiza},
+					  colorlinks=true,
+					  linkcolor=blue,
+					  filecolor=magenta,      
+					  urlcolor=red]{hyperref}
 
 
 \usepackage{manual}
 \usepackage{design}
+
+\def \gitref {https://github.com/gimaevazamat/Design/releases}
 
 
 \usetikzlibrary{shadings}
@@ -55,14 +61,15 @@
 	
 \begin{huge}
 	\begin{center}
-		\textbf{Физический рисунок}
+		\textbf{Физический рисунок}\\
+		\large v0.1. Актуальная версия \href{\gitref}{здесь}
 	\end{center}
 \end{huge}
 
 \section{Общие положения}
 
 \subsection{Начало работы}
-Для начала надо скачать \verb|design.sty| файл в директорию вашего документа для использование наших предопределенных команд и стилей
+Для начала надо \href{\gitref}{отсюда} скачать \verb|design.sty| в директорию вашего документа для использование наших предопределенных команд и стилей
 
 Рисунки выполняются в окружении \verb|tikzpicture|, которое можно встраивать внутрь \verb|figure|:
 \begin{code}
