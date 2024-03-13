@@ -613,7 +613,9 @@ M_3 =
 
 
 \section{Электрические схемы}
-Для отрисовки электрических схем используется пакет \verb|circuittikz|. Рекомендуется использовать аргументы \verb|european resistors| и \verb|american inductors| у всего рисунка
+Для отрисовки электрических схем используется пакет \verb|circuittikz|, у которого есть понятная \href{https://tug.org/docs/latex/circuitikz/circuitikzmanual.pdf}{документация}
+
+Рекомендуется использовать аргументы \verb|european resistors| и \verb|american inductors| у всего рисунка
 \begin{code}
 %	in preamble:
 	\usepackage{circuitikz}
@@ -621,12 +623,14 @@ M_3 =
 	\begin{tikzpicture}[european resistors, american inductors]
 	\end{tikzpicture}
 \end{code}
-Или можно задать это для всего документа в преамбуле:
+
+Или можно задать это для всего документа в преамбуле:\\
 \begin{code}
 %	in preamble:
 	\usepackage{circuitikz}
 	\ctikzset{resistor = european, inductor = american}
 \end{code}
+
 \subsection{Общая логика, провода}
 Общая логика пакета \verb|circuittikz| строится вокруг декорирования пути между двумя точками. Для этого используются дополнительные аргументы у команды \verb|to[]|. Для работы с проводами используется аргумент \verb|short|.
 \begin{figure}[H]
@@ -654,7 +658,7 @@ M_3 =
 \end{figure}
 
 \subsection{Резисторы}
-Резистору соотвествует аргумент \verb|R|. Потенциометру соотвествует аргумент \verb|pR|, длина его среднего выхода равна 0.56 см.
+Резистору соотвествует аргумент \verb|R|. Потенциометру соотвествует аргумент \verb|pR|.
 \begin{figure}[H]
 \begin{minipage}{0.2\linewidth}
 	\centering	
@@ -682,7 +686,7 @@ M_3 =
 
 \end{figure}
 
-Для работы с третьим выходом потенциометра даем уникальное название name потенциометру, а далее обращаемся к этой координате, как к name.wiper (\textit{в примере выше это} \verb|pR.wiper|).
+Для работы с третьим выходом потенциометра даем уникальное название name потенциометру, а далее обращаемся к этой координате, как к \verb|name.wiper| (\textit{в примере выше это} \verb|pR.wiper|).
 
 Параметр \verb|/tikz/circuitikz/bipoles/length=| изменит размер элементов с двумя выводами
 \begin{figure}[H]
@@ -818,8 +822,8 @@ M_3 =
 	\centering	
 	\begin{tikzpicture}[example, european resistors, american inductors]
 		\draw (0,0)
-		to[rmeter,t=$A\,$] (1.5,0)
-		to[rmeter,t=$V$] (3,0)
+		to[rmeter,t=A] (1.5,0)
+		to[rmeter,t=V] (3,0)
 		to[rmeter,t=$\Omega$] (4.5,0);
 		
 		\draw(3.75,0) ++ (-.4,.4) node {\small $+$};
@@ -835,6 +839,41 @@ M_3 =
 	\draw(3.75,0) ++ (-.4,.4) node {\small $+$};
 	\end{code}
 \end{minipage}
+\end{figure}
+
+\subsection{Другие элеткрические элементы}
+
+\begin{figure}[H]
+	\begin{minipage}{0.3\linewidth}
+		\centering	
+		\begin{tikzpicture}[example, european resistors, american inductors]
+			\draw (1.5,0)
+			to[lamp] ++(1.5,0);
+			
+			\draw (0,-1.5)
+			to[diode] ++(1.5,0)
+			to[photodiode] ++(1.5,0)
+			to[led]++(1.5,0);
+			
+			\draw (0.75, -3)
+			to[memristor] ++(3,0);
+									
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.7\linewidth}
+		\begin{code}
+	\draw (1.5,0)
+	to[lamp] ++(1.5,0);
+	
+	\draw (0,-1.5)
+	to[diode] ++(1.5,0)
+	to[photodiode] ++(1.5,0)
+	to[led]++(1.5,0);
+	
+	\draw (0.75,-3)
+	to[memristor] ++(3,0);
+		\end{code}
+	\end{minipage}
 \end{figure}
 
 \subsection{Заземление}
@@ -854,6 +893,44 @@ M_3 =
 	\end{minipage}
 \end{figure}
 
+\subsection{Сила тока в цепях}
+По умолачанию сила тока в пакете \verb|circuittikz| обозначаются и выглядят так:
+\begin{figure}[H]
+	\begin{minipage}{0.2\linewidth}
+		\centering	
+		\begin{tikzpicture}[example, european resistors, american inductors]
+			\draw (0,0) to[R, i^>=$I_1$] (3,0);
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.8\linewidth}
+		\begin{code}
+	\draw (0,0) to[R, i^>=$I_1$] (3,0);			
+		\end{code}
+	\end{minipage}
+\end{figure}
+
+Такой вариант не рекомендуется использовать. Для привычного обозначения можно использовать \verb|flow| (потоки) из этого пакета:
+
+\begin{figure}[H]
+	\begin{minipage}{0.4\linewidth}
+		\centering	
+		\begin{tikzpicture}[example, european resistors, american inductors]
+			\draw (0,0) 
+			to[R, f^>=$I_2$] ++(3,0)
+			to[R, f_>=$I_3$, flow/distance=1] ++(3,0);
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.6\linewidth}
+		\begin{code}
+	\draw (0,0) 
+	to[R, f^>=$I_2$] ++(3,0)
+	to[R, f_>=$I_3$, flow/distance=1] ++(3,0);
+		\end{code}
+	\end{minipage}
+\end{figure}
+Аргумент \verb|flow/distance=| меняет расположение стрелочки вдоль провода. Настроить расположение стрелки относительно провода(сверху/снизу) и направление можно используя разные символы после \verb|f|: \verb|f=,  f<=,  f_=, f_>=, f<^=, f<_=, f>_=|
+
+ 
 \section{Лайфхаки}
 \subsection{Вертикальные подписи для электрических схем}
 \begin{enumerate}
