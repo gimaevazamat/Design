@@ -2,15 +2,201 @@
 \usepackage{geometry}
 \geometry{margin=1.5cm}
 
-\usepackage{../design}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
 
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+
+\usepackage{geometry}
+\geometry{margin=1.5cm}
+
+
+\usepackage{../manual}
+\usepackage{../design}
+\tikzset{>=latex'}
+\usepackage{fancyhdr}
+\pagestyle{empty}
+
+\usepackage{listings}
+\lstnewenvironment{code}{\lstset{
+		backgroundcolor=\color{blue!20},
+		breaklines=true
+}}{}
 \begin{document}
-	\begin{tikzpicture}[>=latex']
-		\fill[water] (0,-.5) rectangle ++(2,-2.5);
+	\begin{huge}
+		\begin{center}
+			\textbf{Примеры}
+		\end{center}
+	\end{huge}
+%	\begin{tikzpicture}[>=latex']
+%		\fill[water] (0,-.5) rectangle ++(2,-2.5);
+%		
+%		\draw[fill=black!25] (0.025,-0.5) rectangle ++(2-0.05,0.1);
+%		\draw[thick] (1,-0.4) -- ++(0,1);
+%		
+%		\draw[thick] (0,0) --++(0,-3) --++(2,0) --++(0,3);	
+%	\end{tikzpicture}
+
+	\begin{figure}[H]
+		\begin{tikzpicture}[example]
+			\lightsource{(0,0)}
+			\draw (0,0) node [above=.1cm] {$A$};
+			\fill[black!10] (-5, -2.5) -- (-3, -1.5) -- (-3, -2) -- (-1,-2) -- (-1.25, -2.5);
+			
+			\draw[glassRed] (-3,-2) rectangle ++(2, 0.5);
+			\draw[thick] (-6,-2.5) -- (1,-2.5);
+			
+			\dist{(-5,-2.5)}{(-1.25,-2.5)}{-90}{below}{$L$};
+			\dist{(-3,-1.5)}{(-1,-1.5)}{90}{above}{$a$};
+			\dist{(-3,-1.5)}{(-3,-2)}{180}{left}{$b$};
+			
+			\draw[ultra thin,<->] (0,-2) -- (0,0) node [pos=.5,right] {$H_0-h$};
+			\draw[ultra thin,<->] (0,-2) -- (0,-2.5) node [pos=.5,right] {$h$};
+			\draw[ultra thin] (-1,-2) -- (0.5, -2);
+			\draw[ultra thin,<->] (-1,-1) -- (0,-1) node [pos=.5,above] {\scriptsize $x-\frac{a}{2}$};
+		\end{tikzpicture}
 		
-		\draw[fill=black!25] (0.025,-0.5) rectangle ++(2-0.05,0.1);
-		\draw[thick] (1,-0.4) -- ++(0,1);
+		\begin{code}
+	\lightsource{(0,0)}
+	\draw (0,0) node [above=.1cm] {$A$};
+	\fill[black!10] (-5, -2.5) -- (-3, -1.5) -- (-3, -2) -- (-1,-2) -- (-1.25, -2.5);
+	
+	\draw[glassRed] (-3,-2) rectangle ++(2, 0.5);
+	\draw[thick] (-6,-2.5) -- (1,-2.5);
+	
+	\dist{(-5,-2.5)}{(-1.25,-2.5)}{-90}{below}{$L$};
+	\dist{(-3,-1.5)}{(-1,-1.5)}{90}{above}{$a$};
+	\dist{(-3,-1.5)}{(-3,-2)}{180}{left}{$b$};
+	
+	\draw[ultra thin,<->] (0,-2) -- (0,0) node [pos=.5,right] {$H_0-h$};
+	\draw[ultra thin,<->] (0,-2) -- (0,-2.5) node [pos=.5,right] {$h$};
+	\draw[ultra thin] (-1,-2) -- (0.5, -2);
+	\draw[ultra thin,<->] (-1,-1) -- (0,-1) node [pos = 0.5,above] {\scriptsize $x-\frac{a}{2}$};
+		\end{code}
+	\end{figure}
+	
+	\begin{figure}[H]
+	\begin{minipage}{0.35\linewidth}
+	\begin{tikzpicture}[example]	
+		\draw[thick] (-2,3) -- (-2,0) -- (2,0) -- (2,3);
+		\draw[fill=black!25] (-1.975,2) rectangle (1.975,2.1);
+		\draw[fill=black!12] (-.5,2.125) rectangle (.5,2.5) node[pos=.5] {$m$};
 		
-		\draw[thick] (0,0) --++(0,-3) --++(2,0) --++(0,3);	
+		\draw[decorate,decoration=
+		{snake,pre length=0.1cm,post length=0.1cm,segment length=0.2cm,amplitude=0.2cm}]
+		(0,0) -- (0,2);
+		\dist{(2,2)}{(2,0)}{0}{right}{$H$}
 	\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.65\linewidth}
+		\begin{code}
+	\draw[thick] (-2,3) -- (-2,0) -- (2,0) -- (2,3);
+	\draw[fill=black!25] (-1.975,2) rectangle (1.975,2.1);
+	\draw[fill=black!12] (-.5,2.125) rectangle (.5,2.5) node[pos=.5] {$m$};
+	
+	\draw[decorate,decoration=
+	{snake,pre length=0.1cm,post length=0.1cm,segment length=0.2cm,amplitude=0.2cm}]
+	(0,0) -- (0,2);
+	\dist{(2,2)}{(2,0)}{0}{right}{$H$}
+		\end{code}
+	\end{minipage}
+	\end{figure}
+	\begin{figure}[H]
+	\begin{tikzpicture} [example, scale=1,european resistors,every node/.style={scale=1}]
+		\draw[densely dotted, ->] (-1, 0) -- (7, 0) node[below] {x};
+		\draw[densely dotted, ->] (0, -2) -- (0, 2) node[right] {y};
+		\draw[densely dotted, ->] (1.5, 1) -- (-1.5, -1) node[below] {z};
+		\draw[fill] (0, 0) circle (0.02);
+
+		
+		\draw[thick, color=red!40!black, rounded corners=6pt] (-0.5, -1.5) -- (0.5, -2/3) -- (0.5, 1.5) -- (-0.5, 2/3) -- cycle;
+		\draw[thick, color=red!40!black, rounded corners=6pt, xshift=2pt] (-0.5, -1.5) -- (0.5, -2/3) -- (0.5, 1.5) -- (-0.5, 2/3) -- cycle;
+		\draw[thick, color=red!40!black, rounded corners=6pt, xshift=-2pt] (-0.5, -1.5) -- (0.5, -2/3) -- (0.5, 1.5) -- (-0.5, 2/3) -- cycle;
+		\draw[thick, color=red!40!black, rounded corners=10pt, reverse directed] (-0.4, -1.4) --++ (-0.4, -0.3) --++ (0.2, -0.8);
+		\draw[thick, color=red!40!black, rounded corners=10pt, directed] (-0.57, -1.1) --++ (0, -0.2) --++ (-.4, -0.5) --++ (0, -0.6);
+		
+		\draw[densely dotted] (4.9, 0) --++ (0, -2);
+		\draw[<->] (0, -1.7) -- (4.9, -1.7);
+		\draw (2.5, -1.7) node[above] {$x$};
+		
+		\draw[thick, fill=blue!20](4.661, -0.466) -- (5.339, 0.134) arc(-56.3:123.7:0.2) -- (4.439, -0.134) -- cycle;
+		\draw[thick, fill=blue!20] (4.55, -.3) circle (0.2);
+		\draw[thick] (4.9, 0.2) -- (4.9, 1.8);
+		\draw[thick] (5, -0.166) arc(-56.3:123.7:0.2);
+		\draw[thick] (4.4, 1.8) -- (5.4, 1.8);
+		\foreach \x in {4.45, 4.55, ..., 5.35}
+		\draw (\x, 1.8) -- (\x+0.1, 1.9);
+		\draw[<->, yscale = 0.6] (4.95, 1.8) arc (80:-260:0.3);
+		
+	\end{tikzpicture}
+	\begin{code}
+	\draw[densely dotted, ->] (-1, 0) -- (7, 0) node[below] {x};
+	\draw[densely dotted, ->] (0, -2) -- (0, 2) node[right] {y};
+	\draw[densely dotted, ->] (1.5, 1) -- (-1.5, -1) node[below] {z};
+	\draw[fill] (0, 0) circle (0.02);
+	
+	\draw[thick, color=red!40!black, rounded corners=6pt] (-0.5, -1.5) -- (0.5, -2/3) -- (0.5, 1.5) -- (-0.5, 2/3) -- cycle;
+	\draw[thick, color=red!40!black, rounded corners=6pt, xshift=2pt] (-0.5, -1.5) -- (0.5, -2/3) -- (0.5, 1.5) -- (-0.5, 2/3) -- cycle;
+	\draw[thick, color=red!40!black, rounded corners=6pt, xshift=-2pt] (-0.5, -1.5) -- (0.5, -2/3) -- (0.5, 1.5) -- (-0.5, 2/3) -- cycle;
+	\draw[thick, color=red!40!black, rounded corners=10pt, reverse directed] (-0.4, -1.4) --++ (-0.4, -0.3) --++ (0.2, -0.8);
+	\draw[thick, color=red!40!black, rounded corners=10pt, directed] (-0.57, -1.1) --++ (0, -0.2) --++ (-.4, -0.5) --++ (0, -0.6);
+	
+	\draw[densely dotted] (4.9, 0) --++ (0, -2);
+	\draw[<->] (0, -1.7) -- (4.9, -1.7);
+	\draw (2.5, -1.7) node[above] {$x$};
+	
+	\draw[thick, fill=blue!20](4.661, -0.466) -- (5.339, 0.134) arc(-56.3:123.7:0.2) -- (4.439, -0.134) -- cycle;
+	\draw[thick, fill=blue!20] (4.55, -.3) circle (0.2);
+	\draw[thick] (4.9, 0.2) -- (4.9, 1.8);
+	\draw[thick] (5, -0.166) arc(-56.3:123.7:0.2);
+	\draw[thick] (4.4, 1.8) -- (5.4, 1.8);
+	\foreach \x in {4.45, 4.55, ..., 5.35}
+	\draw (\x, 1.8) -- (\x+0.1, 1.9);
+	\draw[<->, yscale = 0.6] (4.95, 1.8) arc (80:-260:0.3);
+	\end{code}
+	\end{figure}
+	
+	\begin{figure}[H]
+	\begin{tikzpicture}[example]
+		\draw[thick,fill=black!12] (-3,-3) rectangle (3,3) node [above left] {$m_1$};
+		\draw[->] (0,3) --++(0,1) node [right] {$F$};
+		
+		\draw[decorate,decoration=
+		{snake,pre length=0.1cm,post length=0.1cm,segment length=0.1cm,amplitude=0.1cm}]
+		(0,3) -- (0,1.5) node [pos=.5,right=.1cm] {$k_1$};
+		
+		\draw[fill=black!25](-1,1.5) rectangle (1,.5) node [pos=.5] {$m_2$};
+		
+		\draw[decorate,decoration=
+		{snake,pre length=0.1cm,post length=0.1cm,segment length=0.1cm,amplitude=0.1cm}]
+		(0,.5) -- (0,-1) node [pos=.5,right=.1cm] {$k_2$};
+		
+		\draw[fill=black!25](-1,-1) rectangle (1,-2) node [pos=.5] {$m_3$};
+		
+		\draw[->] (3.5,.5) -- (3.5,-.5) node [pos=.5,right] {$g$};
+		
+	\end{tikzpicture}
+	\begin{code}
+	\draw[thick,fill=black!12] (-3,-3) rectangle (3,3) node [above left] {$m_1$};
+	\draw[->] (0,3) --++(0,1) node [right] {$F$};
+	
+	\draw[decorate,decoration=
+	{snake,pre length=0.1cm,post length=0.1cm,segment length=0.1cm,amplitude=0.1cm}]
+	(0,3) -- (0,1.5) node [pos=.5,right=.1cm] {$k_1$};
+	
+	\draw[fill=black!25](-1,1.5) rectangle (1,.5) node [pos=.5] {$m_2$};
+	
+	\draw[decorate,decoration=
+	{snake,pre length=0.1cm,post length=0.1cm,segment length=0.1cm,amplitude=0.1cm}]
+	(0,.5) -- (0,-1) node [pos=.5,right=.1cm] {$k_2$};
+	
+	\draw[fill=black!25](-1,-1) rectangle (1,-2) node [pos=.5] {$m_3$};
+	
+	\draw[->] (3.5,.5) -- (3.5,-.5) node [pos=.5,right] {$g$};
+	\end{code}
+	\end{figure}
 \end{document}

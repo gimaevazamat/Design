@@ -10,7 +10,10 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{subcaption}
+\usepackage{pdfpages}
 
+\usepackage{fancyhdr}
+\pagestyle{empty}
 
 \usepackage{listings}
 \lstnewenvironment{code}{\lstset{
@@ -36,8 +39,6 @@
 \usepackage[pdftex,
 					  pdfauthor={Yaroslav Pozdnyak \& Azamat Gimaev},
 					  pdftitle={Design},
-					  pdfproducer={shiziki},
-					  pdfcreator={shiza},
 					  colorlinks=true,
 					  linkcolor=blue,
 					  filecolor=magenta,      
@@ -970,5 +971,7 @@ M_3 =
 	\end{code}
 \end{minipage}
 \end{figure}
+
+	\includepdf[pages=-]{example/example.pdf}
 
 \end{document}
