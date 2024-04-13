@@ -48,7 +48,7 @@
 \usepackage{manual}
 \usepackage{design}
 
-\def \gitref {https://github.com/gimaevazamat/Design/releases}
+\def \gitref {https://github.com/gimaevazamat/Design}
 
 
 \usetikzlibrary{shadings}
@@ -63,7 +63,8 @@
 \begin{huge}
 	\begin{center}
 		\textbf{Физический рисунок}\\
-		\large v1.0. Актуальная версия \href{\gitref}{здесь}
+		\small \textit{by Yaroslav Pozdnyak} \& \textit{Azamat Gimaev} \\
+		\large v1.1. Актуальная версия \href{\gitref}{здесь}
 	\end{center}
 \end{huge}
 
@@ -277,6 +278,28 @@ M_3 =
 \end{code}
 \end{minipage}
 \end{figure}
+
+\begin{figure}[H]
+	\begin{minipage}{0.05\linewidth}
+		\centering	
+		\begin{tikzpicture}[example,>=latex']
+			\begin{scope}[shift={(6,3.23)}]
+				\draw(0,0) -- (0.1, 0.173) -- (-0.1, 0.173) -- cycle;
+				\draw[thick] (-0.15, 0.173) --++ (0.3, 0);
+				\draw[pattern={Lines[angle=45,distance=0.05cm]},fill,draw=none] (-0.15, 0.173) rectangle ++(0.3, 0.1);
+			\end{scope}
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.95\linewidth}
+		\begin{code}
+	\begin{scope}[shift={(x, y)}] %(x, y) – координаты нижней вершины треугольника
+		\draw(0,0) -- (0.1, 0.173) -- (-0.1, 0.173) -- cycle;
+		\draw[thick] (-0.15, 0.173) --++ (0.3, 0);
+		\draw[pattern={Lines[angle=45,distance=0.05cm]},fill,draw=none] (-0.15, 0.173) rectangle ++(0.3, 0.1);
+	\end{scope}
+		\end{code}
+	\end{minipage}
+\end{figure}
 \subsection{Подвижное тело на недвижимости}
 Чтобы подчеркнуть подвижность тела, можно добавить расстоние $0.025~\text{cm}$, чтобы оно <<парило>> над поверхностью:
 
@@ -336,7 +359,7 @@ M_3 =
 \subsection{Жидкости, сосуды и поршни}
 \begin{enumerate}
 	\item Сосуды рисуются \verb|thick| линиями.
-	\item Для отрисовки воды используется аргумент \verb|water|, которые автоматически заливает фигуру голубым полупрозрачным цветом. Также есть предопределенные цвета для других заливок: \verb|gas|, \verb|glass|
+	\item Для отрисовки воды используется аргумент \verb|water|, которые автоматически заливает фигуру голубым полупрозрачным цветом. Также есть предопределенные цвета для других заливок: \verb|gas|, \verb|glass|, \verb|oil|
 	\item Поршни выделются серым \verb|black!25| цветом.
 	\item Зазор между поршнем и стенками сосуда 0.025 cm
 \end{enumerate}
@@ -833,8 +856,8 @@ M_3 =
 \begin{minipage}{0.7\linewidth}
 	\begin{code}
 	\draw (0,0)
-	to[rmeter,t=$A\,$] (1.5,0)
-	to[rmeter,t=$V$] (3,0)
+	to[rmeter,t=A] (1.5,0)
+	to[rmeter,t=V] (3,0)
 	to[rmeter,t=$\Omega$] (4.5,0);
 	
 	\draw(3.75,0) ++ (-.4,.4) node {\small $+$};
