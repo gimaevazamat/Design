@@ -437,6 +437,29 @@ M_3 =
 	\end{minipage}
 \end{figure}
 
+\subsection{Гайка}
+Если в Вашем рисунке присутствует гайка, то Вы можете воспользоваться этим паттерном. \verb|(x, y)| -- координата середины гайки.
+
+\begin{figure}[H]
+	\begin{minipage}{0.07\linewidth}
+		\centering	
+		\begin{tikzpicture}[example, >=latex']
+			\begin{scope}[shift={(0,0)}, scale=0.4]
+				\draw[fill=black!25](-0.5, -0.866) -- (0.5, -0.866) -- (1, 0) -- (0.5, 0.866) -- (-0.5, 0.866) -- (-1, 0) -- cycle;
+				\draw[fill=yellow!20] (0, 0) circle(0.45);
+			\end{scope}
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}{0.93\linewidth}
+		\begin{code}
+	\begin{scope}[shift={(x, y)}, scale=0.4]
+		\draw[fill=black!25](-0.5, -0.866) -- (0.5, -0.866) -- (1, 0) -- (0.5, 0.866) -- (-0.5, 0.866) -- (-1, 0) -- cycle;
+		\draw[fill=white] (0, 0) circle(0.45);
+	\end{scope}
+		\end{code}
+	\end{minipage}
+\end{figure}
+
 
 
 \section{Выносные размеры}
