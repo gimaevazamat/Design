@@ -445,16 +445,14 @@ M_3 =
 		\centering	
 		\begin{tikzpicture}[example, >=latex']
 			\begin{scope}[shift={(0,0)}, scale=0.4]
-				\draw[fill=black!25](-0.5, -0.866) -- (0.5, -0.866) -- (1, 0) -- (0.5, 0.866) -- (-0.5, 0.866) -- (-1, 0) -- cycle;
-				\draw[fill=yellow!20] (0, 0) circle(0.45);
+				\draw[fill=black!25](-0.5, -0.866) -- (0.5, -0.866) -- (1, 0) -- (0.5, 0.866) -- (-0.5, 0.866) -- (-1, 0)  (-0.45,0) arc(0:-360:-0.45)  (-1,0) -- (-0.5, -0.866);
 			\end{scope}
 		\end{tikzpicture}
 	\end{minipage}
 	\begin{minipage}{0.93\linewidth}
 		\begin{code}
 	\begin{scope}[shift={(x, y)}, scale=0.4]
-		\draw[fill=black!25](-0.5, -0.866) -- (0.5, -0.866) -- (1, 0) -- (0.5, 0.866) -- (-0.5, 0.866) -- (-1, 0) -- cycle;
-		\draw[fill=white] (0, 0) circle(0.45);
+		\draw[fill=black!25](-0.5, -0.866) -- (0.5, -0.866) -- (1, 0) -- (0.5, 0.866) -- (-0.5, 0.866) -- (-1, 0)  (-0.45,0) arc(0:-360:-0.45)  (-1,0) -- (-0.5, -0.866);
 	\end{scope}
 		\end{code}
 	\end{minipage}
